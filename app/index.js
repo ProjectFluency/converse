@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 export default class converse extends Component {
     render() {
+        var reloadString = (Platform.OS === 'android') ?
+            ("Double tap R on your keyboard to reload, \n" +
+             "Shake or press menu button for dev menu") :
+            ("Press Cmd+R to reload,\n Cmd+D or shake for dev menu");
         return (
                 <View style={styles.container}>
                     <Text style={styles.welcome}>Converse App</Text>
                     <Text style={styles.instructions}>
-                        iOS:Press Cmd+R to reload,{'\n'}
-                        Cmd+D or shake for dev menu
-                    </Text>
-                    <Text style={styles.instructions}>
-                        Android: Double tap R on your keyboard to reload,{'\n'}
-                        Shake or press menu button for dev menu
+                    {reloadString}
                     </Text>
                 </View>
                )
