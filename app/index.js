@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 
+
 export default class converse extends Component {
     render() {
         var reloadString = (Platform.OS === 'android') ?
