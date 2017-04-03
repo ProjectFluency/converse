@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.42.3",
+    "react-native-audio": "^3.2.2",
     "react-native-sound": "^0.9.1"
   },
   "devDependencies": {
