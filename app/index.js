@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import Tabs from 'react-native-tabs';
+import Practice from './practice.js';
 
 class Record extends Component {
     render() {
@@ -16,19 +17,12 @@ class Messages extends Component {
                </View>);
     }
 }
-class Practice extends Component {
-    render() {
-        return(<View style={styles.container}>
-                <Text> Coming soon: a Practice screen </Text>
-               </View>);
-    }
-}
 export default class converse extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      page: 'practice',
+      page: 'messages',
     };
   }
 
@@ -59,7 +53,6 @@ export default class converse extends Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -74,11 +67,6 @@ const styles = StyleSheet.create({
     instructions: {
         textAlign: 'center',
         color: '#333333',
-    },
-    vertlist: {
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     tabbar: {
         backgroundColor:'white',
