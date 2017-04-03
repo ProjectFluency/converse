@@ -10,7 +10,8 @@
     "react": "15.4.2",
     "react-native": "0.42.3",
     "react-native-audio": "^3.2.2",
-    "react-native-sound": "^0.9.1"
+    "react-native-sound": "^0.9.1",
+    "react-native-tabs": "^1.0.9"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
