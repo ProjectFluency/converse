@@ -124,6 +124,11 @@ class AudioExample extends Component {
       }
     }
 
+    _stopPlaying() {
+        this.state.sound.stop();
+        this.setState({donePlaying: true, playing: false, sound: null});
+    }
+
     async _play() {
       if (this.state.recording) {
         await this._stop();
@@ -140,12 +145,10 @@ class AudioExample extends Component {
         });
 
         setTimeout(() => {
-          that.setState({playing: true, donePlaying: false});
-          console.log(that.state);
+          that.setState({playing: true, donePlaying: false, sound: sound});
           sound.play((success) => {
             if (success) {
-              that.setState({donePlaying: true, playing: false});
-              console.log(that.state);
+              that.setState({donePlaying: true, playing: false, sound: null});
               console.log('successfully finished playing');
             } else {
               console.log('playback failed due to audio decoding errors');
@@ -187,7 +190,6 @@ class AudioExample extends Component {
 
     render() {
       let innerview = null;
-      console.log(this.state);
       let mode = null;
       if (this.state.recording) { mode = 'recording'; }
       else if (this.state.stoppedRecording) {
@@ -197,19 +199,30 @@ class AudioExample extends Component {
       }
       else { mode = 'beginning'; }
       console.log(mode);
-
-
-      if (!this.state.recording && !this.state.stoppedRecording) {
-          innerview = this._renderButton("RECORD", () => {this._record()}, this.state.recording );
-      } else if (!this.state.recording && this.state.stoppedRecording) {
-          innerview = <View style={styles.inline}>
-                        {this._renderButton("REDO", () => {this._record()}, this.state.recording )}
-                        <Text> | </Text>
-                        {this._renderButton("PLAY", () => {this._play()} )}
-                      </View>;
-      } else {
-          innerview = this._renderButton("STOP", () => {this._stop()} );
+      switch(mode) {
+          case 'beginning':
+              innerview = this._renderButton("RECORD", () => {this._record()}, this.state.recording );
+              break;
+          case 'playing':
+              innerview = this._renderButton("...", () => {this._stopPlaying()} );
+              break;
+          case 'recording':
+              innerview = this._renderButton("STOP", () => {this._stop()} );
+              break;
+          case 'doneRecording':
+          case 'donePlaying':
+              innerview = <View style={styles.inline}>
+                            {this._renderButton("REDO", () => {this._record()}, this.state.recording )}
+                            <Text> | </Text>
+                            {this._renderButton("REPLAY", () => {this._play()} )}
+                            <Text> | </Text>
+                            {this._renderButton("SUBMIT", () => {console.log("SUBMIT!")} )}
+                          </View>;
+              break;
+          default:
+              innerview = <Text> Unsupported mode: {mode} </Text>;
       }
+
       //<Text style={styles.progressText}>{this.state.currentTime}s</Text>
       return (
         <View style={styles.container}>
