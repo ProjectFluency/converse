@@ -42,6 +42,8 @@
 		A93847591E9306C500380EFA /* 02_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = A93847531E9306C500380EFA /* 02_03.wav */; };
 		A938475A1E9306C500380EFA /* 02_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = A93847541E9306C500380EFA /* 02_02.wav */; };
 		A938475B1E9306C500380EFA /* 02_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = A93847551E9306C500380EFA /* 02_01.wav */; };
+		A9C922801E95A74E003E269C /* 01_02_full.wav in Resources */ = {isa = PBXBuildFile; fileRef = A9C9227E1E95A74E003E269C /* 01_02_full.wav */; };
+		A9C922811E95A74E003E269C /* 01_01_full.wav in Resources */ = {isa = PBXBuildFile; fileRef = A9C9227F1E95A74E003E269C /* 01_01_full.wav */; };
 		AF42DBE16D1D41BD8977C652 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F1A5CD08734B87ADCBCE2C /* libRNSound.a */; };
 		BD57DDA693DF4BB8AC43FC65 /* libRNAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 334263F3EA00463F9D6142BA /* libRNAudio.a */; };
 /* End PBXBuildFile section */
@@ -286,6 +288,8 @@
 		A93847531E9306C500380EFA /* 02_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02_03.wav; path = ../android/app/src/main/res/raw/02_03.wav; sourceTree = "<group>"; };
 		A93847541E9306C500380EFA /* 02_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02_02.wav; path = ../android/app/src/main/res/raw/02_02.wav; sourceTree = "<group>"; };
 		A93847551E9306C500380EFA /* 02_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02_01.wav; path = ../android/app/src/main/res/raw/02_01.wav; sourceTree = "<group>"; };
+		A9C9227E1E95A74E003E269C /* 01_02_full.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 01_02_full.wav; path = ../android/app/src/main/res/raw/01_02_full.wav; sourceTree = "<group>"; };
+		A9C9227F1E95A74E003E269C /* 01_01_full.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 01_01_full.wav; path = ../android/app/src/main/res/raw/01_01_full.wav; sourceTree = "<group>"; };
 		E9F1A5CD08734B87ADCBCE2C /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -499,6 +503,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A9C9227E1E95A74E003E269C /* 01_02_full.wav */,
+				A9C9227F1E95A74E003E269C /* 01_01_full.wav */,
 				A93847501E9306C500380EFA /* 01_03.wav */,
 				A93847511E9306C500380EFA /* 01_02.wav */,
 				A93847521E9306C500380EFA /* 01_01.wav */,
@@ -920,11 +926,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A93847561E9306C500380EFA /* 01_03.wav in Resources */,
+				A9C922801E95A74E003E269C /* 01_02_full.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A938475A1E9306C500380EFA /* 02_02.wav in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				A93847591E9306C500380EFA /* 02_03.wav in Resources */,
 				A93847581E9306C500380EFA /* 01_01.wav in Resources */,
+				A9C922811E95A74E003E269C /* 01_01_full.wav in Resources */,
 				A93847571E9306C500380EFA /* 01_02.wav in Resources */,
 				A938475B1E9306C500380EFA /* 02_01.wav in Resources */,
 			);

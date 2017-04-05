@@ -23,7 +23,7 @@ export default class converse extends Component {
     super(props);
 
     this.state = {
-      page: 'record',
+      page: 'practice',
     };
   }
 

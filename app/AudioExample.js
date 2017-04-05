@@ -14,6 +14,9 @@ import Sound from 'react-native-sound';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
 class AudioExample extends Component {
+    constructor (props) {
+        super(props);
+    }
 
     state = {
       currentTime: 0.0,

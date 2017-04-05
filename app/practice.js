@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, TouchableHighlight } from 'react-native';
 const Sound = require('react-native-sound');
 var content = require('./config/scripts');
+import FlipCard from 'react-native-flip-card';
+
+
+function playSound(soundfile, folder) {
+    folder = (folder) ? folder : Sound.MAIN_BUNDLE;
+    let sound = new Sound(soundfile, folder, (error) => {
+        if (error) {
+            console.log('error', error);
+        }
+        else {
+            console.log('duration in seconds: ' + sound.getDuration());
+        }
+        sound.play((success) => {
+            if (success) { console.log('Playing success!'); }
+            else { console.log('playback failed. Audio decoding errors.'); }
+        });
+    });
+}
 
 class Line extends Component {
     constructor(props) {
@@ -9,32 +27,28 @@ class Line extends Component {
         Sound.setCategory('Ambient', true);
 
         this.playSound = () => {
-            let sound = new Sound(this.props.audio, Sound.MAIN_BUNDLE, (error) => {
-                if (error) {
-                    console.log('error', error);
-                }
-                else {
-                    console.log('duration in seconds: ' + sound.getDuration());
-                }
-                sound.play((success) => {
-                    if (success) { console.log('Playing success!'); }
-                    else { console.log('playback failed. Audio decoding errors.'); }
-                });
-            });
+            playSound(this.props.audio);
         }
     }
     render() {
         let {audio, text, parity} = this.props;
-        let style = (parity === "even") ? styles.lineLeft : styles.lineRight;
-        return(<View style={style}>
-                  <Text>  {text} </Text>
-                  <Button style={styles.playButton} onPress={this.playSound} title="▷ Play" />
-                  <Button style={styles.playButton} onPress={this.playSound} title="🎙 Record" />
+        let viewStyle = (parity === "even") ? styles.lineLeft : styles.lineRight;
+        let textStyle = (parity === "even") ? styles.lineTextLeft: styles.lineTextRight;
+        return(<View style={viewStyle}>
+                  <Text style={textStyle}>{text}</Text>
                 </View>);
     }
 }
 
 class Dialog extends Component {
+    constructor(props) {
+        super(props);
+        Sound.setCategory('Ambient', true);
+
+        this.playSound = () => {
+            playSound(this.props.audio);
+        }
+    }
     render() {
         let {name, title, lines} = this.props;
         let lineviews = lines.map(function(line, idx) {
@@ -44,10 +58,25 @@ class Dialog extends Component {
                         text={line.text}
                         parity={parity} />);
         });
-        return(<View style={styles.dialog}>
+        /*return(<View style={styles.dialog}>
                 <Text> Dialog {name}: {title} </Text>
                 {lineviews}
-               </View>);
+               </View>);*/
+        return(<FlipCard
+                style={styles.card}
+                flipHorizontal={true}
+                flipVertical={false}>
+                <View style={styles.cardFace}>
+                    <Text style={styles.cardHeading}> {title} </Text>
+                </View>
+                <View style={styles.cardBack}>
+                    <View style={styles.dialog}>
+                        {lineviews}
+                    </View>
+                    <Button style={styles.playButton} onPress={this.playSound}
+                     title="▷  Play" />
+                </View>
+               </FlipCard>);
     }
 }
 
@@ -58,13 +87,16 @@ class Chapter extends Component {
             return(<Dialog key={dialog.name}
                             name={dialog.name}
                             title={dialog.title}
-                            lines={dialog.lines}/>);
+                            lines={dialog.lines}
+                            audio={dialog.audio}/>);
         });
         return(<View style={styles.chapter}>
                 <Text style={styles.chapHeading}>
                     Chapter {name}: {title}
                 </Text>
-                {dialogviews}
+                <View style={styles.allCards}>
+                    {dialogviews}
+                </View>
                </View>);
     }
 }
@@ -103,21 +135,60 @@ const styles = StyleSheet.create({
     chapter: {
         flex: 1,
         justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         padding:'0%',
     },
     dialog: {
         flex: 0,
-        justifyContent: 'flex-start',
+        justifyContent: 'space-around',
         alignItems: 'flex-start',
-        padding:'0%',
-        width: '100%',
+    },
+    allCards: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+    },
+    card: {
+        flex: 0,
+        height: 250,
+        width: 170,
+        margin: 5,
+        borderColor: 'transparent',
+    },
+    cardBack: {
+        flex: 1,
+        transform: [{scaleX: -1}],
+        borderRadius: 10,
+        borderColor: '#4990E2',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 10,
+    },
+    cardFace: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: '#4990E2',
+    },
+    cardHeading: {
+        color: '#fff',
+        textAlign: 'center',
+        padding: 10,
     },
     lineLeft: {
-        padding:10,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     lineRight: {
-        padding:10,
         alignSelf: 'flex-end',
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+    lineTextLeft: {
+    },
+    lineTextRight: {
+        textAlign: 'right',
     },
 });
