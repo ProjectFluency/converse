@@ -29,6 +29,7 @@ class Line extends Component {
         return(<View style={style}>
                   <Text>  {text} </Text>
                   <Button style={styles.playButton} onPress={this.playSound} title="▷ Play" />
+                  <Button style={styles.playButton} onPress={this.playSound} title="🎙 Record" />
                 </View>);
     }
 }
@@ -85,6 +86,7 @@ export default class Practice extends Component {
 // TODO: figure out code reuse between index.js and here; eg. the 'container' class is duplicated.
 const styles = StyleSheet.create({
     playButton: {
+        flex: 0,
     },
     container: {
         flex: 1,
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
         padding:'0%',
     },
     dialog: {
-        flex: 1,
+        flex: 0,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         padding:'0%',
