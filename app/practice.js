@@ -19,17 +19,10 @@ function playSound(soundfile, folder) {
             else { console.log('playback failed. Audio decoding errors.'); }
         });
     });
+    return sound;
 }
 
 class Line extends Component {
-    constructor(props) {
-        super(props);
-        Sound.setCategory('Ambient', true);
-
-        this.playSound = () => {
-            playSound(this.props.audio);
-        }
-    }
     render() {
         let {audio, text, parity} = this.props;
         let viewStyle = (parity === "even") ? styles.lineLeft : styles.lineRight;
@@ -40,17 +33,42 @@ class Line extends Component {
     }
 }
 
-class Dialog extends Component {
+class PlayButton extends Component {
+    state = {
+        soundPlaying: null,
+    }
     constructor(props) {
         super(props);
         Sound.setCategory('Ambient', true);
 
         this.playSound = () => {
-            playSound(this.props.audio);
+            let sound = playSound(this.props.audio);
+            this.setState({soundPlaying: sound});
+        }
+        this.stopSound = () => {
+            this.state.soundPlaying.stop();
+            this.setState({soundPlaying: null});
         }
     }
     render() {
-        let {name, title, lines} = this.props;
+        let playOrStop = null;
+        if(this.state.soundPlaying) {
+            playOrStop = <Button style={styles.playButton}
+                                 color='#922'
+                                 onPress = {this.stopSound}
+                                 title = "□ STOP" />
+        } else {
+            playOrStop = <Button style={styles.playButton}
+                                 onPress = {this.playSound}
+                                 title="▷  Play" />
+        }
+        return(playOrStop);
+    }
+}
+
+class Dialog extends Component {
+    render() {
+        let {name, title, lines, audio} = this.props;
         let lineviews = lines.map(function(line, idx) {
             let parity = (idx % 2) ? "odd" : "even"
                 return(<Line key={line.audio}
@@ -58,10 +76,6 @@ class Dialog extends Component {
                         text={line.text}
                         parity={parity} />);
         });
-        /*return(<View style={styles.dialog}>
-                <Text> Dialog {name}: {title} </Text>
-                {lineviews}
-               </View>);*/
         return(<FlipCard
                 style={styles.card}
                 flipHorizontal={true}
@@ -73,8 +87,7 @@ class Dialog extends Component {
                     <View style={styles.dialog}>
                         {lineviews}
                     </View>
-                    <Button style={styles.playButton} onPress={this.playSound}
-                     title="▷  Play" />
+                    <PlayButton audio={audio} />
                 </View>
                </FlipCard>);
     }
@@ -118,6 +131,10 @@ export default class Practice extends Component {
 // TODO: figure out code reuse between index.js and here; eg. the 'container' class is duplicated.
 const styles = StyleSheet.create({
     playButton: {
+        flex: 0,
+    },
+    playButton: {
+        color: '#922',
         flex: 0,
     },
     container: {
