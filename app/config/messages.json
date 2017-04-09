@@ -1,0 +1,36 @@
+{
+  "default_time": "19:00",
+  "questions":
+    [{"week": 1,
+      "schedule_by_start_day": [
+          {"monday": [1, 2, 3, 4, 5, 6, 7],
+           "tuesday": [1, 2, 4, 5, 6, 7, 3],
+           "wednesday": [1, 4, 5, 6, 7, 2, 3],
+           "thursday": [1, 5, 6, 7, 2, 3, 4],
+           "friday": [1, 5, 7, 6, 2, 3, 4],
+           "saturday": [1, 7, 6, 2, 3, 4, 5],
+           "saturday": [1, 6, 2, 3, 4, 5, 7]}],
+      "messages": [{"day": 1,
+                    "day_of_week": "any",
+                    "message": "How are you doing today?"},
+                   {"day": 2,
+                    "day_of_week": "any",
+                    "message": "What do you think about this weather?"},
+                   {"day": 3,
+                    "day_of_week": "any",
+                    "message": "Are you having a good day so far?"},
+                   {"day": 4,
+                    "day_of_week": "WThF",
+                    "message": "How is your week going?"},
+                   {"day": 5,
+                    "day_of_week": "FSa",
+                    "message": "Any plans for the weekend?"},
+                   {"day": 6,
+                    "day_of_week": "any",
+                    "message": "How is your day?"},
+                   {"day": 7,
+                    "day_of_week": "weekend",
+                    "message": "Are you having a good weekend?"}]}
+
+]}
+
